@@ -52,6 +52,11 @@ def load_history_graph(
 def load_models_history_graph(
     acc_list: list,
     labels: list,
+    name: str,
+    marker_color: str,
+    acc_list_2: list,
+    name_2: str,
+    marker_color_2: str,
     title: str = 'Models training history',
     width: int = 700,
     height: int = 500
@@ -59,14 +64,23 @@ def load_models_history_graph(
     fig = go.Figure()
     
     fig.add_trace(go.Bar(
+        name=name,
         orientation='h',
         y=labels,
         x=acc_list,
-        text=acc_list
+        text=acc_list,
+        marker_color=marker_color
+    ))
+    fig.add_trace(go.Bar(
+        name=name_2,
+        orientation='h',
+        y=labels,
+        x=acc_list_2,
+        text=acc_list_2,
+        marker_color=marker_color_2
     ))
     
-    fig.update_yaxes(categoryorder='total descending')
-    fig.update_xaxes(title='Accuracy')
+    fig.update_xaxes(title='Accuracy', range=(0, 1.1))
     
     fig.update_layout(
         title=title,
