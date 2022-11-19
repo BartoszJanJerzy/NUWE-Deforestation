@@ -47,3 +47,31 @@ def load_history_graph(
     )
     
     return fig
+
+
+def load_models_history_graph(
+    acc_list: list,
+    labels: list,
+    title: str = 'Models training history',
+    width: int = 700,
+    height: int = 500
+) -> go.Figure:
+    fig = go.Figure()
+    
+    fig.add_trace(go.Bar(
+        orientation='h',
+        y=labels,
+        x=acc_list,
+        text=acc_list
+    ))
+    
+    fig.update_yaxes(categoryorder='total descending')
+    fig.update_xaxes(title='Accuracy')
+    
+    fig.update_layout(
+        title=title,
+        width=width,
+        height=height
+    )
+    
+    return fig
