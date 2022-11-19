@@ -4,13 +4,20 @@ import numpy as np
 
 class AugmentationPipeline:
   
+  def __init__(self, x: int, y: int):
+    self.x = x
+    self.y = y
+  
   def load_augmented_images(self, base_images: list) -> list:
       shifted_images = self._vertical_shift(base_images)
       bright_images = self._brightness(base_images)
       rotated_images = self._rotation(base_images)
       sobel_images = self._edge_detection(base_images)
       
-      return shifted_images + bright_images + rotated_images + sobel_images
+      augmented_images = shifted_images + bright_images + rotated_images
+      augmented_images = [cv2.resize(img, (self.x, self.y)) for img in augmented_images]
+      
+      return augmented_images
   
   def _vertical_shift(self, images):
     final_images = []
@@ -46,6 +53,7 @@ class AugmentationPipeline:
       hsv = np.array(hsv, dtype = np.uint8)
       aug_img = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
       final_images.append(aug_img)
+      
       
     return final_images
 
