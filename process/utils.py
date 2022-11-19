@@ -36,8 +36,8 @@ def load_history_graph(
             col=col, row=1
         )
     
-    fig.update_yaxes(range=(0, max(acc)+0.1), col=2)
-    fig.update_yaxes(range=(0, max(val_loss)+0.2), col=1)
+    fig.update_yaxes(range=(0, max(acc)+0.1), col=1)
+    fig.update_yaxes(range=(0, max(val_loss)+0.5), col=2)
     
     fig.update_layout(
         title=title,
